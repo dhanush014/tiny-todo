@@ -1,8 +1,10 @@
 import { format } from "date-fns";
+import { debounce } from "lodash";
 
 const STORAGE_KEY = "tiny-todo";
 
 let todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+let query = "";
 
 const input = document.getElementById("new-todo-input");
 const addButton = document.getElementById("add-button");
@@ -37,7 +39,7 @@ function deleteTodo(id) {
 
 function render() {
   list.innerHTML = "";
-  for (const todo of todos) {
+  for (const todo of todos.filter((t) => t.title.toLowerCase().includes(query))) {
     const li = document.createElement("li");
     li.className = todo.done ? "todo done" : "todo";
     li.innerHTML = `
@@ -54,5 +56,12 @@ function render() {
 }
 
 addButton.addEventListener("click", addTodo);
+document.getElementById("search").addEventListener(
+  "input",
+  debounce((e) => {
+    query = e.target.value.trim().toLowerCase();
+    render();
+  }, 200)
+);
 
 render();
