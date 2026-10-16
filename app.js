@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import confetti from "canvas-confetti";
 
 const STORAGE_KEY = "tiny-todo";
 
@@ -33,10 +34,15 @@ function deleteTodo(id) {
   todos = todos.filter((t) => t.id !== id);
   save();
   render();
+  if (todos.length === 0) confetti({ particleCount: 60, spread: 50 });
 }
 
 function render() {
   list.innerHTML = "";
+  if (todos.length === 0) {
+    list.innerHTML = `<li class="empty">Nothing to do 🎉</li>`;
+    return;
+  }
   for (const todo of todos) {
     const li = document.createElement("li");
     li.className = todo.done ? "todo done" : "todo";
