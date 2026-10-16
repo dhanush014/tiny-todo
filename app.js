@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import confetti from "canvas-confetti";
 
 const STORAGE_KEY = "tiny-todo";
 
@@ -26,6 +27,9 @@ function toggleTodo(id) {
   todo.done = !todo.done;
   save();
   render();
+  if (todos.length > 0 && todos.every((t) => t.done)) {
+    confetti({ particleCount: 150, spread: 80, origin: { y: 0.7 } });
+  }
 }
 
 function deleteTodo(id) {
