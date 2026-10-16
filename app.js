@@ -34,11 +34,26 @@ function deleteTodo(id) {
   render();
 }
 
+function moveTodo(fromId, toId) {
+  const from = todos.findIndex((t) => t.id === fromId);
+  const to = todos.findIndex((t) => t.id === toId);
+  const [moved] = todos.splice(from, 1);
+  todos.splice(to, 0, moved);
+  save();
+  render();
+}
+
 function render() {
   list.innerHTML = "";
   for (const todo of todos) {
     const li = document.createElement("li");
     li.className = todo.done ? "todo-card done" : "todo-card";
+    li.draggable = true;
+    li.dataset.id = todo.id;
+    li.addEventListener("dragstart", () => li.classList.add("dragging"));
+    li.addEventListener("dragend", () => li.classList.remove("dragging"));
+    li.addEventListener("dragover", (e) => e.preventDefault());
+    li.addEventListener("drop", () => moveTodo(Number(list.querySelector(".dragging").dataset.id), todo.id));
     li.innerHTML = `
       <input type="checkbox" ${todo.done ? "checked" : ""} />
       <span class="title"></span>

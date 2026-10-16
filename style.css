@@ -131,3 +131,12 @@ h1 {
   background: #fee2e2;
   color: #b91c1c;
 }
+
+.todo-card[draggable="true"] {
+  cursor: grab;
+}
+
+.todo-card.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+}
