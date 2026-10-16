@@ -7,6 +7,7 @@ let todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 const input = document.getElementById("new-todo-input");
 const addButton = document.getElementById("add-button");
 const list = document.getElementById("todo-list");
+const clearButton = document.getElementById("clear-completed");
 
 function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
@@ -35,6 +36,12 @@ function deleteTodo(id) {
   render();
 }
 
+function clearCompleted() {
+  todos = todos.filter((t) => t.done);
+  save();
+  render();
+}
+
 function render() {
   list.innerHTML = "";
   for (const todo of todos) {
@@ -54,5 +61,6 @@ function render() {
 }
 
 addButton.addEventListener("click", addTodo);
+clearButton.addEventListener("click", clearCompleted);
 
 render();

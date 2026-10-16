@@ -89,3 +89,22 @@ h1 {
   font-size: 18px;
   cursor: pointer;
 }
+
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+#clear-completed {
+  border: none;
+  background: none;
+  color: var(--muted);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+#clear-completed:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
