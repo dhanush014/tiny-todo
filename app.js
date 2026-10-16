@@ -54,5 +54,8 @@ function render() {
 }
 
 addButton.addEventListener("click", addTodo);
+input.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") addTodo();
+});
 
 render();
