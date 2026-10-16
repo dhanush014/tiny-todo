@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import moment from "moment";
 
 const STORAGE_KEY = "tiny-todo";
 
@@ -43,7 +43,7 @@ function render() {
     li.innerHTML = `
       <input type="checkbox" ${todo.done ? "checked" : ""} />
       <span class="title"></span>
-      <span class="meta">Added ${format(todo.createdAt, "MMM d")}</span>
+      <span class="meta">Added ${moment(todo.createdAt).fromNow()}</span>
       <button class="delete" title="Delete">×</button>
     `;
     li.querySelector(".title").textContent = todo.title;
