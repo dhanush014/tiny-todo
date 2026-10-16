@@ -89,3 +89,9 @@ h1 {
   font-size: 18px;
   cursor: pointer;
 }
+
+.empty {
+  padding: 32px 0;
+  text-align: center;
+  color: var(--muted);
+}
