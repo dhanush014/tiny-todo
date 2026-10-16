@@ -29,7 +29,6 @@ function toggleTodo(id) {
 }
 
 function deleteTodo(id) {
-  if (!confirm("Delete this to-do?")) return;
   todos = todos.filter((t) => t.id !== id);
   save();
   render();
@@ -39,7 +38,7 @@ function render() {
   list.innerHTML = "";
   for (const todo of todos) {
     const li = document.createElement("li");
-    li.className = todo.done ? "todo done" : "todo";
+    li.className = todo.done ? "todo-card done" : "todo-card";
     li.innerHTML = `
       <input type="checkbox" ${todo.done ? "checked" : ""} />
       <span class="title"></span>
