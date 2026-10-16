@@ -3,6 +3,7 @@ import { format } from "date-fns";
 const STORAGE_KEY = "tiny-todo";
 
 let todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+let filter = "all";
 
 const input = document.getElementById("new-todo-input");
 const addButton = document.getElementById("add-button");
@@ -37,7 +38,10 @@ function deleteTodo(id) {
 
 function render() {
   list.innerHTML = "";
-  for (const todo of todos) {
+  const visible = todos.filter((t) =>
+    filter === "all" ? true : filter === "done" ? t.done : !t.done
+  );
+  for (const todo of visible) {
     const li = document.createElement("li");
     li.className = todo.done ? "todo done" : "todo";
     li.innerHTML = `
@@ -54,5 +58,14 @@ function render() {
 }
 
 addButton.addEventListener("click", addTodo);
+
+for (const button of document.querySelectorAll(".filters button")) {
+  button.addEventListener("click", () => {
+    filter = button.dataset.filter;
+    document.querySelector(".filters .active").classList.remove("active");
+    button.classList.add("active");
+    render();
+  });
+}
 
 render();
