@@ -89,3 +89,28 @@ h1 {
   font-size: 18px;
   cursor: pointer;
 }
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.filters {
+  display: flex;
+  gap: 4px;
+}
+
+.filters button {
+  padding: 4px 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.filters button.active {
+  border-color: var(--border);
+  color: var(--text);
+}
