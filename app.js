@@ -7,6 +7,7 @@ let todos = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 const input = document.getElementById("new-todo-input");
 const addButton = document.getElementById("add-button");
 const list = document.getElementById("todo-list");
+const count = document.getElementById("count");
 
 function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
@@ -51,6 +52,8 @@ function render() {
     li.querySelector(".delete").addEventListener("click", () => deleteTodo(todo.id));
     list.appendChild(li);
   }
+  const left = todos.filter((t) => !t.done).length;
+  count.textContent = `${left} ${left === 1 ? "item" : "items"} left`;
 }
 
 addButton.addEventListener("click", addTodo);
